@@ -9,8 +9,8 @@ This is a backend for an e-commerce application developed using **Spring Boot**.
 ## Planned Features (Roadmap)
 * Modules for `Auth`, `Address`, `Cart`, and `Order` management.
 * Implementation of **Spring Security** for authentication and authorization.
-* Implementation of FrontEnd.
 * Deployment on AWS (Amazon Web Services).
+* Implementation of FrontEnd.
 
 ---
 
