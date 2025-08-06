@@ -4,7 +4,8 @@ This is a backend for an e-commerce application developed using **Spring Boot**.
 
 ## Key Features
 * **REST API** with CRUD operations for managing the `Category` module.
-* `Product` module with database relationships between `Category` and `Product` - currently in development.
+* Database relationships between `Category` and `Product`.
+* **REST API** with CRUD operations for managing the `Product` module - currently in development.
 
 ## Planned Features (Roadmap)
 * Modules for `Auth`, `Address`, `Cart`, and `Order` management.
