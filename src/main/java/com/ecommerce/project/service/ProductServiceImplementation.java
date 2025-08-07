@@ -26,9 +26,10 @@ public class ProductServiceImplementation implements ProductService {
     private ModelMapper modelMapper;
 
     @Override
-    public ProductDTO addProduct(Long categoryId, Product product) {
+    public ProductDTO addProduct(Long categoryId, ProductDTO productDTO) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "categoryId", categoryId));
+        Product product = modelMapper.map(productDTO, Product.class);
         product.setImage("default.png");
         product.setCategory(category);
         double specialPrice = product.getPrice() - ((product.getDiscount() / 100) * product.getPrice());
@@ -74,16 +75,16 @@ public class ProductServiceImplementation implements ProductService {
     }
 
     @Override
-    public ProductDTO updateProduct(Long productId, Product product) {
+    public ProductDTO updateProduct(Long productId, ProductDTO productDTO) {
         Product productFromDb = productRepository.findById(productId)
                 .orElseThrow(() -> new ResourceNotFoundException("Product", "productId", productId));
 
-        productFromDb.setProductName(product.getProductName());
-        productFromDb.setDescription(product.getDescription());
-        productFromDb.setQuantity(product.getQuantity());
-        productFromDb.setPrice(product.getPrice());
-        productFromDb.setDiscount(product.getDiscount());
-        double specialPrice = product.getPrice() - ((product.getDiscount() / 100) * product.getPrice());
+        productFromDb.setProductName(productDTO.getProductName());
+        productFromDb.setDescription(productDTO.getDescription());
+        productFromDb.setQuantity(productDTO.getQuantity());
+        productFromDb.setPrice(productDTO.getPrice());
+        productFromDb.setDiscount(productDTO.getDiscount());
+        double specialPrice = productDTO.getPrice() - ((productDTO.getDiscount() / 100) * productDTO.getPrice());
         productFromDb.setSpecialPrice(specialPrice);
 
         Product savedProduct = productRepository.save(productFromDb);
