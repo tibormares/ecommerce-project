@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ public class Address {
     @Size(min = 4, message = "Zipcode must be at least 4 characters long")
     private String zipcode;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "addresses")
     private List<User> users = new ArrayList<>();
 
