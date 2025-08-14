@@ -24,10 +24,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -131,6 +128,31 @@ public class AuthenticationController {
         userRepository.save(user);
 
         return ResponseEntity.ok().body(new MessageResponse("User created successfully"));
+    }
+
+    @GetMapping("/username")
+    public String currentUser(Authentication authentication) {
+        if (authentication != null) {
+            return authentication.getName();
+        } else {
+            return "No authentication";
+        }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<UserInfoResponse> getUserDetails(Authentication authentication) {
+        UserDetailsImplementation userDetails = (UserDetailsImplementation) authentication.getPrincipal();
+
+        List<String> roles = userDetails.getAuthorities()
+                .stream()
+                .map(item -> item.getAuthority())
+                .toList();
+
+        UserInfoResponse response = new UserInfoResponse(userDetails.getId(),
+                userDetails.getUsername(),
+                roles);
+
+        return ResponseEntity.ok().body(response);
     }
 
 }
