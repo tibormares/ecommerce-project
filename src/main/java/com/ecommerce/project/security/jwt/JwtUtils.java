@@ -56,6 +56,14 @@ public class JwtUtils {
         return cookie;
     }
 
+    // Cleaning Cookie
+    public ResponseCookie getCleanJwtCookie() {
+        ResponseCookie cookie = ResponseCookie.from(jwtCookieName, null)
+                .path("/api")
+                .build();
+        return cookie;
+    }
+
     // Getting JWT from Header
     public String getJwtFromHeader(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
