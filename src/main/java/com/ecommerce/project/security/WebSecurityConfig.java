@@ -54,6 +54,7 @@ public class WebSecurityConfig {
         return authenticationProvider;
     }
 
+    @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
@@ -123,33 +124,33 @@ public class WebSecurityConfig {
             Set<Role> adminRoles = Set.of(userRole, sellerRole, adminRole);
 
             // Create users if not exist
-            if (!userRepository.existsByUsername("user1")) {
+            if (!userRepository.existsByUserName("user1")) {
                 User user1 = new User("user1", "user1@example.com", passwordEncoder.encode("user1"));
                 userRepository.save(user1);
             }
 
-            if (!userRepository.existsByUsername("seller1")) {
+            if (!userRepository.existsByUserName("seller1")) {
                 User seller1 = new User("seller1", "seller1@example.com", passwordEncoder.encode("seller1"));
                 userRepository.save(seller1);
             }
 
-            if (!userRepository.existsByUsername("admin1")) {
+            if (!userRepository.existsByUserName("admin1")) {
                 User admin1 = new User("admin1", "admin1@example.com", passwordEncoder.encode("admin1"));
                 userRepository.save(admin1);
             }
 
             // Update roles for existing users
-            userRepository.findByUsername("user1").ifPresent(user -> {
+            userRepository.findByUserName("user1").ifPresent(user -> {
                 user.setRoles(userRoles);
                 userRepository.save(user);
             });
 
-            userRepository.findByUsername("seller1").ifPresent(seller -> {
+            userRepository.findByUserName("seller1").ifPresent(seller -> {
                 seller.setRoles(sellerRoles);
                 userRepository.save(seller);
             });
 
-            userRepository.findByUsername("admin1").ifPresent(admin -> {
+            userRepository.findByUserName("admin1").ifPresent(admin -> {
                 admin.setRoles(adminRoles);
                 userRepository.save(admin);
             });
