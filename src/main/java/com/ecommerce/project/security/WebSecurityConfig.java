@@ -96,6 +96,7 @@ public class WebSecurityConfig {
                         "/webjars/**"));
     }
 
+    @Bean
     public CommandLineRunner initData(RoleRepository roleRepository,
                                       UserRepository userRepository,
                                       PasswordEncoder passwordEncoder) {
