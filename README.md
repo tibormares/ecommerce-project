@@ -7,13 +7,14 @@ This is a backend for an e-commerce application developed using **Spring Boot**.
 * **REST API** for managing the `Product` module.
 * **REST API** for managing the `Address` module.
 * **REST API** for managing the `Shopping Cart` module.
+* **REST API** for managing the `Order` module.
 * Database relationships (e.g., Category-Product, User-Address, ...)
 * **Spring Security** for user authentication and role-based authorization.
 
 ## Planned Features (Roadmap)
-* Module for `Order` management - in development.
-* Deployment on AWS (Amazon Web Services).
-* (Maybe) Implementation of FrontEnd.
+* Deployment on AWS (Amazon Web Services) - in development.
+* Full API documentation.
+* Implementation of FrontEnd - maybe.
 
 ## REST APIs
 A full list of REST API endpoints is currently being prepared and will be documented here.
