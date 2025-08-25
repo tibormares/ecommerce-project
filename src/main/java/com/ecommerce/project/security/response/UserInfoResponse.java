@@ -1,6 +1,5 @@
 package com.ecommerce.project.security.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.List;

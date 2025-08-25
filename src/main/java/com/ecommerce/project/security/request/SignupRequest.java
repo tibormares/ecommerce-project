@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import java.util.Set;
-
 @Data
 @Schema(description = "Data model for new user registration")
 public class SignupRequest {
