@@ -4,6 +4,10 @@ import com.ecommerce.project.payload.OrderDTO;
 import com.ecommerce.project.payload.OrderRequestDTO;
 import com.ecommerce.project.service.OrderService;
 import com.ecommerce.project.util.AuthUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name = "Order", description = "APIs for managing user orders")
 public class OrderController {
 
     @Autowired
@@ -19,6 +24,12 @@ public class OrderController {
     @Autowired
     private AuthUtil authUtil;
 
+    @Operation(summary = "Place a new order", description = "Creates an order from the user's current cart. Requires user authentication.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Order placed successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input (e.g., cart is empty, invalid address ID)"),
+            @ApiResponse(responseCode = "401", description = "User is not authenticated")
+    })
     @PostMapping("/order/users/payments/{paymentMethod}")
     public ResponseEntity<OrderDTO> orderProducts(@PathVariable String paymentMethod,
                                                   @RequestBody OrderRequestDTO orderRequestDTO) {

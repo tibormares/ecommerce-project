@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Schema(description = "Data model for category")
 public class CategoryDTO {
 
     @Schema(description = "Category ID", example = "213")

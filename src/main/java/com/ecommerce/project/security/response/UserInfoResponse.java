@@ -10,7 +10,6 @@ public class UserInfoResponse {
 
     private Long id;
 
-    @JsonIgnore
     private String jwtToken;
 
     private String username;
