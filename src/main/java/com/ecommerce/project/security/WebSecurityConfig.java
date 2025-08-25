@@ -69,11 +69,12 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests.requestMatchers(
                                 "/api/auth/**",
+                                        "/api/public/**",
                                         "/v3/api-docs/**",
                                         "/swagger-ui/**",
                                         "/images/**").permitAll()
                                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/api/public/**").hasAnyRole("USER", "ADMIN")
+                                .requestMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
                                 .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

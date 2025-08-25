@@ -11,7 +11,7 @@ public interface AddressService {
     List<AddressDTO> getAddresses();
     AddressDTO getAddressById(Long addressId);
     List<AddressDTO> getUserAddresses(User user);
-    AddressDTO updateAddress(Long addressId, AddressDTO addressDTO);
-    String deleteAddress(Long addressId);
+    AddressDTO updateAddress(Long addressId, AddressDTO addressDTO, User loggedInUser);
+    String deleteAddress(Long addressId, User loggedInUser);
 
 }

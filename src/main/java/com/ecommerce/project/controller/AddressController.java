@@ -33,7 +33,7 @@ public class AddressController {
             @ApiResponse(responseCode = "400", description = "Invalid address data provided"),
             @ApiResponse(responseCode = "401", description = "User is not authenticated")
     })
-    @PostMapping("/addresses")
+    @PostMapping("/users/addresses")
     public ResponseEntity<AddressDTO> createAddress(@Valid @RequestBody AddressDTO addressDTO) {
         User user = authUtil.loggedInUser();
         AddressDTO savedAddressDTO = addressService.createAddress(addressDTO, user);
@@ -46,7 +46,7 @@ public class AddressController {
             @ApiResponse(responseCode = "200", description = "Successfully retrieved list of all addresses"),
             @ApiResponse(responseCode = "401", description = "Unauthorized access - User is not authenticated or not an admin")
     })
-    @GetMapping("/addresses")
+    @GetMapping("/admin/addresses")
     public ResponseEntity<List<AddressDTO>> getAddresses() {
         List<AddressDTO> addressDTOList = addressService.getAddresses();
 
@@ -59,7 +59,7 @@ public class AddressController {
             @ApiResponse(responseCode = "401", description = "Unauthorized access - User is not authenticated or not an admin"),
             @ApiResponse(responseCode = "404", description = "Address with the given ID not found")
     })
-    @GetMapping("/addresses/{addressId}")
+    @GetMapping("/admin/addresses/{addressId}")
     public ResponseEntity<AddressDTO> getAddressById(@PathVariable Long addressId) {
         AddressDTO addressDTO = addressService.getAddressById(addressId);
 
@@ -86,10 +86,10 @@ public class AddressController {
             @ApiResponse(responseCode = "401", description = "Unauthorized access - User is not authenticated or not authorized to update this address"),
             @ApiResponse(responseCode = "404", description = "Address with the given ID not found")
     })
-    @PutMapping("/addresses/{addressId}")
+    @PutMapping("/users/addresses/{addressId}")
     public ResponseEntity<AddressDTO> updateAddress(@PathVariable Long addressId,
                                                     @Valid @RequestBody AddressDTO addressDTO) {
-        AddressDTO updatedAddressDTO = addressService.updateAddress(addressId, addressDTO);
+        AddressDTO updatedAddressDTO = addressService.updateAddress(addressId, addressDTO, authUtil.loggedInUser());
 
         return new ResponseEntity<>(updatedAddressDTO, HttpStatus.OK);
     }
@@ -100,9 +100,9 @@ public class AddressController {
             @ApiResponse(responseCode = "401", description = "Unauthorized access - User is not authenticated or not authorized to delete this address"),
             @ApiResponse(responseCode = "404", description = "Address with the given ID not found")
     })
-    @DeleteMapping("/addresses/{addressId}")
+    @DeleteMapping("/users/addresses/{addressId}")
     public ResponseEntity<String> deleteAddress(@PathVariable Long addressId) {
-        String status = addressService.deleteAddress(addressId);
+        String status = addressService.deleteAddress(addressId, authUtil.loggedInUser());
 
         return new ResponseEntity<>(status, HttpStatus.OK);
     }

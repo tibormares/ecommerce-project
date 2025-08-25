@@ -5,6 +5,7 @@ import com.ecommerce.project.exceptions.ResourceNotFoundException;
 import com.ecommerce.project.model.Cart;
 import com.ecommerce.project.model.CartItem;
 import com.ecommerce.project.model.Product;
+import com.ecommerce.project.model.User;
 import com.ecommerce.project.payload.CartDTO;
 import com.ecommerce.project.payload.ProductDTO;
 import com.ecommerce.project.repositories.CartItemRepository;
@@ -132,10 +133,10 @@ public class CartServiceImplementation implements CartService {
 
     @Override
     public CartDTO getCart(String email, Long cartId) {
-        Cart cart = cartRepository.findCartByEmailAndCartId(email, cartId);
+        Cart cart = cartRepository.findCartByEmail(email);
 
         if (cart == null) {
-            throw new ResourceNotFoundException("Cart", "cartId", cartId);
+            throw new ResourceNotFoundException("Cart", "userEmail", email);
         }
 
         CartDTO cartDTO = modelMapper.map(cart, CartDTO.class);

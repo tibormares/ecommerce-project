@@ -64,9 +64,13 @@ public class AddressServiceImplementation implements AddressService {
     }
 
     @Override
-    public AddressDTO updateAddress(Long addressId, AddressDTO addressDTO) {
+    public AddressDTO updateAddress(Long addressId, AddressDTO addressDTO, User loggedInUser) {
         Address addressInDb = addressRepository.findById(addressId)
                 .orElseThrow(() -> new ResourceNotFoundException("Address", "addressId", addressId));
+
+        if (!addressInDb.getUser().getUserId().equals(loggedInUser.getUserId())) {
+            throw new ResourceNotFoundException("Address", "addressId", addressId);
+        }
 
         addressInDb.setStreet(addressDTO.getStreet());
         addressInDb.setBuildingName(addressDTO.getBuildingName());
@@ -85,9 +89,13 @@ public class AddressServiceImplementation implements AddressService {
     }
 
     @Override
-    public String deleteAddress(Long addressId) {
+    public String deleteAddress(Long addressId, User loggedInUser) {
         Address addressInDb = addressRepository.findById(addressId)
                 .orElseThrow(() -> new ResourceNotFoundException("Address", "addressId", addressId));
+
+        if (!addressInDb.getUser().getUserId().equals(loggedInUser.getUserId())) {
+            throw new ResourceNotFoundException("Address", "addressId", addressId);
+        }
 
         User user = addressInDb.getUser();
         user.getAddresses().removeIf(address -> address.getAddressId().equals(addressId));
