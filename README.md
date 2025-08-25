@@ -13,7 +13,7 @@ This is a backend for an e-commerce application developed using **Spring Boot**.
 
 ## Planned Features (Roadmap)
 * Deployment on AWS (Amazon Web Services) - in development.
-* Full API documentation.
+* Full API documentation - in development.
 * Implementation of FrontEnd - maybe.
 
 ## REST APIs
@@ -29,3 +29,5 @@ A full list of REST API endpoints is currently being prepared and will be docume
 * **Maven**
 * **Lombok, ModelMapper**
 * **Git**
+* **Swagger (OpenAPI)**
+* **AWS - RDS + Elastic Beanstalk**
