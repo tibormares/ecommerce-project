@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Data model for a user's address")
 public class AddressDTO {
 
-    @Schema(description = "Unique identifier of the address", example = "101")
+    @Schema(description = "Unique identifier of the address", example = "101", accessMode = Schema.AccessMode.READ_ONLY)
     private Long addressId;
 
     @Schema(description = "Street name and number", example = "Panská 12")
@@ -29,7 +29,7 @@ public class AddressDTO {
     @Schema(description = "Country", example = "Czech republic")
     private String country;
 
-    @Schema(description = "Postal code (ZIP code)", example = "388 41")
+    @Schema(description = "Postal code (ZIP code)", example = "38841")
     private String zipcode;
 
 }

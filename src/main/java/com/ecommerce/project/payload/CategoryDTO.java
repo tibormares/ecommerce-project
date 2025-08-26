@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Data model for category")
 public class CategoryDTO {
 
-    @Schema(description = "Category ID", example = "213")
+    @Schema(description = "Category ID", example = "213", accessMode = Schema.AccessMode.READ_ONLY)
     private Long categoryId;
 
     @Schema(description = "Category name", example = "Electronics")

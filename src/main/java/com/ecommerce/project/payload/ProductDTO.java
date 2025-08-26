@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Schema(description = "Data model for a product")
 public class ProductDTO {
 
-    @Schema(description = "Unique identifier of the product", example = "1")
+    @Schema(description = "Unique identifier of the product", example = "1", accessMode = Schema.AccessMode.READ_ONLY)
     private Long productId;
 
     @Schema(description = "Name of the product", example = "iPhone 15 Pro")
