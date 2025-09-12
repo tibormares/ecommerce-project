@@ -1,1 +1,3 @@
-# It will be added in the future...
+# Help
+
+For detailed troubleshooting or frequently asked questions, please refer to the project's Wiki.
