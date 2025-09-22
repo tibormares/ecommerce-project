@@ -2,7 +2,6 @@ package com.ecommerce.project;
 
 import com.ecommerce.project.model.Category;
 import com.ecommerce.project.model.Product;
-import com.ecommerce.project.payload.CategoryDTO;
 import com.ecommerce.project.payload.ProductDTO;
 import com.ecommerce.project.repositories.CategoryRepository;
 import com.ecommerce.project.repositories.ProductRepository;
