@@ -4,6 +4,7 @@ import com.ecommerce.project.exceptions.APIException;
 import com.ecommerce.project.exceptions.ResourceNotFoundException;
 import com.ecommerce.project.model.Category;
 import com.ecommerce.project.payload.CategoryDTO;
+import com.ecommerce.project.payload.CategoryResponse;
 import com.ecommerce.project.repositories.CategoryRepository;
 import com.ecommerce.project.service.CategoryServiceImplementation;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.*;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +32,49 @@ public class CategoryServiceImplementationTest {
 
     @InjectMocks
     private CategoryServiceImplementation categoryService;
+
+    @Test
+    void getAllCategories_shouldReturnPagedCategories_whenCategoriesExist() {
+        Integer pageNumber = 0;
+        Integer pageSize = 5;
+        String sortBy = "categoryName";
+        String sortOrder = "asc";
+
+        Pageable pageDetails = PageRequest.of(pageNumber, pageSize, Sort.by(sortBy).ascending());
+
+        List<Category> categories = List.of(new Category(1L, "Electronics"), new Category(2L, "Books"));
+
+        Page<Category> categoryPage = new PageImpl<>(categories, pageDetails, categories.size());
+
+        when(categoryRepository.findAll(any(Pageable.class))).thenReturn(categoryPage);
+        when(modelMapper.map(any(Category.class), eq(CategoryDTO.class)))
+                .thenAnswer(invocation -> {
+                    Category source = invocation.getArgument(0);
+                    return new CategoryDTO(source.getCategoryId(), source.getCategoryName());
+                });
+
+        CategoryResponse response = categoryService.getAllCategories(pageNumber, pageSize, sortBy, sortOrder);
+
+        assertNotNull(response);
+        assertEquals(2, response.getContent().size());
+        assertEquals("Electronics", response.getContent().getFirst().getCategoryName());
+        assertEquals(pageNumber, response.getPageNumber());
+        assertEquals(pageSize, response.getPageSize());
+    }
+
+    @Test
+    void getAllCategories_shouldThrowException_whenNoCategoriesExist() {
+        Integer pageNumber = 0;
+        Integer pageSize = 5;
+        String sortBy = "categoryName";
+        String sortOrder = "asc";
+
+        when(categoryRepository.findAll(any(Pageable.class))).thenReturn(Page.empty());
+
+        assertThrows(APIException.class, () ->
+                categoryService.getAllCategories(pageNumber, pageSize, sortBy, sortOrder)
+        );
+    }
 
     @Test
     void createCategory_shouldCreateCategory_whenCategoryNameIsUnique() {
