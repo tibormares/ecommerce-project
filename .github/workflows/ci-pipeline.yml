@@ -8,6 +8,10 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
+    outputs:
+      jar_file_name: ${{ steps.find_jar.outputs.name }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,6 +32,10 @@ jobs:
 
       - name: Build with Maven and Run Tests
         run: ./mvnw clean install
+
+      - name: Find JAR file name
+        id: find_jar
+        run: echo "name=$(find target -name '*.jar' -printf '%f')" >> $GITHUB_OUTPUT
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
@@ -57,4 +65,4 @@ jobs:
 
           version_label: "ecom-app-${{ github.sha }}-${{ github.run_number }}"
 
-          deployment_package: "*.jar"
+          deployment_package: ${{ needs.build-and-test.outputs.jar_file_name }}
