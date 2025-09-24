@@ -55,4 +55,6 @@ jobs:
           environment_name: "Ecommerce-app-env"
           region: "eu-north-1"
 
+          version_label: "ecom-app-${{ github.sha }}-${{ github.run_number }}"
+
           deployment_package: "*.jar"
