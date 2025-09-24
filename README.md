@@ -29,13 +29,19 @@ A backend for an e-commerce platform built with Java and Spring Boot. This proje
 
 * **Framework:** Spring Boot (Web, Security, Data JPA)
 * **Language:** Java 21
-* **Database:** PostgreSQL (Production), H2 In-Memory (Development)
+* **Database:** PostgreSQL (Production), H2 In-Memory (Development & Testing)
 * **Security:** JSON Web Tokens (JWT)
 * **Build Tool:** Apache Maven
 * **Testing:** JUnit, Mockito
 * **Utilities:** Lombok, ModelMapper
-* **Deployment:** AWS Elastic Beanstalk, AWS RDS (PostgreSQL)
 * **API Documentation:** OpenAPI (SpringDoc)
+
+---
+## 🚀 DevOps / CI/CD
+
+* **CI/CD Platform:** GitHub Actions (for automated build, testing, and deployment)
+* **Deployment Platform:** AWS Elastic Beanstalk (for hosting the application environment)
+* **Production Database:** AWS RDS (PostgreSQL)
 
 ---
 
