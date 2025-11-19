@@ -7,9 +7,7 @@
 
 A backend for an e-commerce platform built with Java and Spring Boot. This project demonstrates a complete RESTful API with JWT-based security for managing users, addresses, products, categories, carts and orders.
 
-| Live API Documentation (Swagger UI)                                                                                               |
-|-----------------------------------------------------------------------------------------------------------------------------------|
-| [Explore the API](http://ecommerce-app-env.eba-fsx2e3s2.eu-north-1.elasticbeanstalk.com/swagger-ui/index.html) / screenshot below |
+> **Note:** The live demo on AWS is currently offline (project archived). Please refer to the "Run the Project Locally" section to test the application.
 
 ---
 
@@ -39,37 +37,21 @@ A backend for an e-commerce platform built with Java and Spring Boot. This proje
 ---
 ## 🚀 DevOps / CI/CD
 
-* **CI/CD Platform:** GitHub Actions (for automated build, testing, and deployment)
-* **Deployment Platform:** AWS Elastic Beanstalk (for hosting the application environment)
+This project was configured for continuous deployment to the cloud.
+
+* **CI/CD Platform:** GitHub Actions (automated build, testing, and deployment)
+* **Deployment Platform:** AWS Elastic Beanstalk (hosted the application environment)
 * **Production Database:** AWS RDS (PostgreSQL)
 
 ---
 
 ## 🚀 Getting Started
 
-You have two primary ways to interact with this project:
+To explore and test this project, please run it locally on your machine.
 
-### 1. Use the Live API (Recommended) 🔛
+### Run the Project Locally 💻
 
-The easiest way to test the API is through the live version deployed on AWS. The interactive Swagger UI documentation allows you to test all endpoints directly from your browser.
-
-* **Base URL:** `http://ecommerce-app-env.eba-fsx2e3s2.eu-north-1.elasticbeanstalk.com`
-* **Swagger UI:** **[http://ecommerce-app-env.eba-fsx2e3s2.eu-north-1.elasticbeanstalk.com/swagger-ui/index.html](http://ecommerce-app-env.eba-fsx2e3s2.eu-north-1.elasticbeanstalk.com/swagger-ui/index.html)**
-
-#### Demo Account for the Live Version
-
-To test the secured endpoints on the deployed version, you can log in with the following demo account:
-
-`.../api/auth/signin`
-
-* **Username:** `user1`
-* **Password:** `user1`
-
-This account has the `USER` role and will allow you to test all public (`/public`) and user-specific (`/users`) endpoints, such as managing your cart, addresses, and creating orders. Access to administrative (`/admin`) endpoints requires an `ADMIN` role.
-
-### 2. Run the Project Locally 💻
-
-If you wish to run the application on your own machine (and get admin access), follow these steps using IntelliJ IDEA.
+Follow these steps using IntelliJ IDEA or any IDE of your choice.
 
 #### Prerequisites
 
